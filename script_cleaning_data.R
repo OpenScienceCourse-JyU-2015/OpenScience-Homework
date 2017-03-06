@@ -21,6 +21,7 @@ trees[trees=="N/A"] <- NA
 sort(unique(trees$SPECIES)  )
   # replace \ for empty spaces
   trees$SPECIES <- gsub("\"","",trees$SPECIES)
+  trees$SPECIES[grep("Abies",trees$SPECIES)][3] <- "Abies (type)"
   
 unique(trees$SPECIESTYPE)  
 
@@ -65,6 +66,7 @@ sort(unique(trees$SPECIES))
   #create a colunm for those observation that are species types and assign type objects
   trees$herbariumtypes <- rep(NA, length(trees$SPECIES))
   trees$herbariumtypes[grep("type",trees$SPECIES)] <- "type"
+  
   
   #create a colunm for the mixed information present in the "species" colunm.
   #all species with this attribute will be renamed to "mixed"

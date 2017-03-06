@@ -1,9 +1,9 @@
 # Analysis script
 
 park <- dbReadTable(mydb, "treesPark")
-head(park)
-
 street <- dbReadTable(mydb, "treesStreet")
+
+#function 1 ####
 
 #function for parks
 parkfun <- function(x) {
@@ -24,3 +24,6 @@ stfun <- function(x) {
 
 #teste
 stfun("Acer")
+
+
+# function 2 ####

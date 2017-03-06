@@ -61,7 +61,7 @@ parkfun2 <- function(x,y){
 }
 
 #teste
-parkfun2("Acer",1000)
+parkfun("Acer",1000)
 
 #function2 for the streets
 
@@ -120,7 +120,31 @@ mymap <- GetMap.bbox(bb$lonR, bb$latR, destfile = "map.png", GRAYSCALE =FALSE)
 par(mfrow=c(1,2))
 PlotOnStaticMap(mymap,pointsparks@coords[,2],pointsparks@coords[,1], pch=21, bg="red", cex=0.8)
 PlotOnStaticMap(mymap,pointsstreets@coords[,2],pointsstreets@coords[,1], pch=21, bg="blue", cex=0.5)
+dev.off()
 
 #graph 2
+# differences in growth between streets and parks
+treeheight <- ggplot(trees, aes(x=trees$TREEHEIGHTinMETRES,y=..count.., fill=TYPEOFTREE) )+
+  geom_histogram(binwidth=5)+
+  ylab("Count")+
+  xlab("Height")+
+  theme_bw()
+treeheight
 
+#graph 3
+# trees conditions according to height and locality
+condition <- ggplot(trees, aes(x=CONDITION, y=TREEHEIGHTinMETRES, fill=TYPEOFTREE))+
+  geom_boxplot()
+condition
+
+#graph 4
+# tree vigour according to height and locality
+vigour <- ggplot(trees, aes(x=VIGOUR, y=TREEHEIGHTinMETRES, fill=TYPEOFTREE))+
+  geom_boxplot()
+vigour
+
+#graph 5
+# Acer in the parks and the distance to the other Acers
+a <- parkfun("Acer")
+hist(a,xlab = "distance")
 

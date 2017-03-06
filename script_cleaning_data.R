@@ -54,6 +54,8 @@ unique(trees$TREETAG)
 unique(trees$TREEHEIGHTinMETRES)    
   # multiply negative values per -1, since negatives are not allowed
   trees$TREEHEIGHTinMETRES[which(trees$TREEHEIGHTinMETRES<0)] <- -1*trees$TREEHEIGHTinMETRES[which(trees$TREEHEIGHTinMETRES<0)]
+  # exclude bizarre value
+  trees$TREEHEIGHTinMETRES[which(trees$TREEHEIGHTinMETRES==832)] <- NA
  
 # end of the data cleaning  ####
 

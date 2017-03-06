@@ -85,9 +85,7 @@ sort(unique(trees$SPECIES))
   
 # write the new file in the disk ####
   write.csv(trees, "odTrees_afterGMM.csv",row.names = FALSE )
-  
- 
-  
+
 
   
   

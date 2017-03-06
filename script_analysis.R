@@ -148,3 +148,6 @@ vigour
 a <- parkfun("Acer")
 hist(a,xlab = "distance")
 
+# disconect the database
+dbDisconnect(mydb)
+

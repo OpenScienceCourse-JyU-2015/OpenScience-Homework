@@ -25,8 +25,7 @@ dbWriteTable(mydb, "trees", trees)
    dbWriteTable(mydb, "treesStreet", treesStreet)
    dbWriteTable(mydb, "treesPark", treesPark)
    
-# disconect the database
-dbDisconnect(mydb)
+
 
 
 

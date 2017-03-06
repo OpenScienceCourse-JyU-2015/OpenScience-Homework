@@ -7,7 +7,7 @@ library(DBI)
 
 #creating a database
 
-mydb <- dbConnect(RSQLite::SQLite(), dbnames="my-db.sqlite")
+mydb <- dbConnect(RSQLite::SQLite(), dbnames="mydb.sqlite")
 
 #loading the data to the database
 
@@ -27,5 +27,6 @@ dbWriteTable(mydb, "trees", trees)
    
 # disconect the database
 dbDisconnect(mydb)
+
 
 

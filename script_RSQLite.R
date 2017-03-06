@@ -7,7 +7,7 @@ library(DBI)
 
 #creating a database
 
-mydb <- dbConnect(RSQLite::SQLite(), "")
+mydb <- dbConnect(RSQLite::SQLite(), dbnames="my-db.sqlite")
 
 #loading the data to the database
 

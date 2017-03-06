@@ -99,3 +99,28 @@ stfun2 <- function(x,y){
 #test
 stfun2("Acer",100)
 
+####################################################################################
+install.packages(c('RgoogleMaps', 'PBSmapping',"GISTools"))
+library(GISTools)
+library(ggplot2)
+library(RgoogleMaps)
+library(PBSmapping)
+library(sp)
+
+#graph 1
+# distribution of the points in parks and strees
+
+pointsparks <- SpatialPoints(cbind(park$LONGITUDE,park$LATITUDE))
+pointsstreets <- SpatialPoints(cbind(street$LONGITUDE,street$LATITUDE))
+
+bb <- qbbox(lon = park$LONGITUDE, lat = park$LATITUDE)
+
+mymap <- GetMap.bbox(bb$lonR, bb$latR, destfile = "map.png", GRAYSCALE =FALSE)
+
+par(mfrow=c(1,2))
+PlotOnStaticMap(mymap,pointsparks@coords[,2],pointsparks@coords[,1], pch=21, bg="red", cex=0.8)
+PlotOnStaticMap(mymap,pointsstreets@coords[,2],pointsstreets@coords[,1], pch=21, bg="blue", cex=0.5)
+
+#graph 2
+
+

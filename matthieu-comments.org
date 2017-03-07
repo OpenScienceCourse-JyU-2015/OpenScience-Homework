@@ -18,6 +18,12 @@
   plot(x)
   #+END_EXAMPLE
 
+- Make Git ignore intermediate files: it is good that you only keep track of
+  your script files and raw data, since all intermediate files can be
+  regenerated from them. It is good practice to tell Git which files it should
+  ignore so that it will not warn you about them as being untracked. See the
+  =.gitignore= file I created in your repository.
+
 * Cleaning the dataset
 
 - Curating was thoroughly done, good job!

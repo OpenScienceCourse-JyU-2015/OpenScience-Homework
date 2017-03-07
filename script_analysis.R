@@ -15,6 +15,7 @@ mydb = dbConnect(RSQLite::SQLite(), "mydb.sqlite")
 
 park <- dbReadTable(mydb, "treesPark")
 street <- dbReadTable(mydb, "treesStreet")
+trees <- rbind(park, street) # this is the dataset for the full city
 
 #function 1 ####
 
@@ -37,7 +38,6 @@ stfun <- function(x) {
 
 #teste
 stfun("Acer")
-
 
 
 ## Matthieu's comment: the code calculates distances, but not between all the
@@ -69,6 +69,8 @@ dA = pairDist(all, "Acer")
 plot(density(dA, bw = 500), ylim = c(0, 2e-4))
 lines(density(dS, bw = 500), col = "blue")
 lines(density(dP, bw = 500), col = "red")
+
+## End of Matthieu's comment
 
 
 # function 2 ####
@@ -144,8 +146,63 @@ stfun2 <- function(x,y){
 #test
 stfun2("Acer",100)
 
+## Matthieu's comments
+# Here again I am afraid the instructions were not crystal clear :)
+# The aim was to have a function that would be called like:
+#   averageDistGenusMinCount(trees, minCount = 50)
+# And the output would be something like:
+#   Acer     14500.89
+#   Albies   50489.14
+#   ...      ...
+# Where, for each genus, we have the average distance between trees of this exact genus.
+
+# Also, the coding idea was to reuse the previous functions, so that you don't
+# have to code everything in just one function.
+
+# This is one way how it can be done:
+
+pairDistGenus = function(data, x) {
+    # Return the distances between all pairs of trees of genus 'x' in dataset
+    # 'data'
+    genus = subset(data, genus == x)
+    distances = dist(genus[, c("TREELOCATIONX", "TREELOCATIONY")], method = "euclidean")
+    return(as.vector(distances))
+}
+
+averageDistGenus = function(data, x) {
+    # Return the average distance between all pairs of trees of genus 'x' in
+    # dataset 'data'
+    distances = pairDistGenus(data = data, x = x)
+    return(mean(distances))
+}
+
+averageDistGenusMinCount = function(data, minCount) {
+    # Return a table with average distances between all trees within each genus
+    # for which there are at least 'minCount' trees in the dataset 'data'
+    counts = table(data$genus)
+    genus = names(counts)[counts >= minCount]
+    avgDist = rep(NA, length(genus))
+    for (g in seq_along(genus)) {
+        avgDist[g] = averageDistGenus(data = data, x = genus[g])
+    }
+    return(data.frame(genus = genus, count = counts[counts >= minCount],
+                      avgDist = avgDist))
+}
+
+# Test
+
+dists = averageDistGenusMinCount(trees, 50)
+dim(dists)
+dists
+
+plot(dists$count, dists$avgDist)
+# Some species seem more aggregated than other
+dists$genus[dists$avgDist < 3500]
+
+## End of Matthieu's comment
+
 ####################################################################################
-install.packages(c('RgoogleMaps', 'PBSmapping',"GISTools"))
+#install.packages(c('RgoogleMaps', 'PBSmapping',"GISTools"))
 library(GISTools)
 library(ggplot2)
 library(RgoogleMaps)

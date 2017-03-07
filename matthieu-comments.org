@@ -1,0 +1,35 @@
+* General comments
+
+- Code indentation: it is usually used to denote specific blocks such as *for*
+  loops or *if* and *else* conditional blocks. Avoid using indentation to
+  separate "sections" of your analysis as it might be confusing for other
+  readers - use comments with the emphasis of your choice to denote section
+  titles, for example:
+
+  #+BEGIN_EXAMPLE
+  # *** Section 1 ***
+
+  # Assign variable
+  x <- 1:10
+
+  # *** Section 2 ***
+
+  # Graph
+  plot(x)
+  #+END_EXAMPLE
+
+* Cleaning the dataset
+
+- Curating was thoroughly done, good job!
+- When removing "weird" values, try to make your code robust, i.e. still
+  working if the input file is updated later. For example, if there is a tree
+  with an impossible height (832 meters), use:
+  #+BEGIN_SRC 
+  trees$height[trees$height > 200] = NA
+  #+END_SRC
+  instead of:
+  #+BEGIN_SRC 
+  trees$height[trees$height == 832] = NA
+  #+END_SRC
+  The second version only works for weird values at 832 meters, the first one
+  works for all values above 200 meters.

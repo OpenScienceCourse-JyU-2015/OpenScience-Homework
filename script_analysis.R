@@ -239,11 +239,27 @@ condition <- ggplot(trees, aes(x=CONDITION, y=TREEHEIGHTinMETRES, fill=TYPEOFTRE
   geom_boxplot()
 condition
 
+## CONDITION is actually an ordered factor, let's recode it appropriately:
+trees$CONDITION = factor(trees$CONDITION, levels = c("Dead", "Dying",
+  "Very Poor", "Poor", "Fair", "Good"), ordered = T)
+
+## Maybe this view is also interesting
+condition2 <- ggplot(trees, aes(x=TYPEOFTREE, y=TREEHEIGHTinMETRES, fill=CONDITION))+
+  geom_boxplot()
+condition2
+
+
 #graph 4
 # tree vigour according to height and locality
 vigour <- ggplot(trees, aes(x=VIGOUR, y=TREEHEIGHTinMETRES, fill=TYPEOFTREE))+
   geom_boxplot()
 vigour
+
+## Maybe this view is also interesting
+vigour2 <- ggplot(trees, aes(x=TYPEOFTREE, y=TREEHEIGHTinMETRES, fill=VIGOUR))+
+  geom_boxplot()
+vigour2
+
 
 #graph 5
 # Acer in the parks and the distance to the other Acers

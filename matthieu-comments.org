@@ -1,29 +1,3 @@
-* General comments
-
-- Code indentation: it is usually used to denote specific blocks such as *for*
-  loops or *if* and *else* conditional blocks. Avoid using indentation to
-  separate "sections" of your analysis as it might be confusing for other
-  readers - use comments with the emphasis of your choice to denote section
-  titles, for example:
-
-  #+BEGIN_EXAMPLE
-  # *** Section 1 ***
-
-  # Assign variable
-  x <- 1:10
-
-  # *** Section 2 ***
-
-  # Graph
-  plot(x)
-  #+END_EXAMPLE
-
-- Make Git ignore intermediate files: it is good that you only keep track of
-  your script files and raw data, since all intermediate files can be
-  regenerated from them. It is good practice to tell Git which files it should
-  ignore so that it will not warn you about them as being untracked. See the
-  =.gitignore= file I created in your repository.
-
 * Cleaning the dataset
 
 - Curating was thoroughly done, good job!
@@ -55,3 +29,38 @@
   # Do stuff with the database
   dbDisconnect(mydb)
   #+END_SRC
+
+* Analysis
+
+- There was some misunderstanding about what the final function was expected to
+  perform (my mistake)
+- The idea was to reuse the functions already written previously, instead of
+  writing incrementally large functions
+- Good ideas and good use of existing packages in the exploratory graphs
+
+* Miscellaneous comments
+
+- Code indentation: it is usually used to denote specific blocks such as *for*
+  loops or *if* and *else* conditional blocks. Avoid using indentation to
+  separate "sections" of your analysis as it might be confusing for other
+  readers - use comments with the emphasis of your choice to denote section
+  titles, for example:
+
+  #+BEGIN_EXAMPLE
+  # *** Section 1 ***
+
+  # Assign variable
+  x <- 1:10
+
+  # *** Section 2 ***
+
+  # Graph
+  plot(x)
+  #+END_EXAMPLE
+
+- Make Git ignore intermediate files: it is good that you only keep track of
+  your script files and raw data, since all intermediate files can be
+  regenerated from them. It is good practice to tell Git which files it should
+  ignore so that it will not warn you about them as being untracked. See the
+  =.gitignore= file I created in your repository.
+

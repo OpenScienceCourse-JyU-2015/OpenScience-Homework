@@ -39,3 +39,19 @@
   #+END_SRC
   The second version only works for weird values at 832 meters, the first one
   works for all values above 200 meters.
+
+* Storing the dataset in a SQLite database, respecting the first normal form
+
+- There was a bit of misunderstanding about what we meant by splitting the data
+  frame into two tables to avoid redundant information.
+- I provided a full correction in the script =script_RSQLite.R=
+- About not being able to create a database file: you can create the file by
+  providing the filename without any argument name in the function call, as
+  below:
+  #+BEGIN_SRC 
+  library(DBI)
+  library(RSQLite)
+  mydb <- dbConnect(RSQLite::SQLite(), "mydb.sqlite")
+  # Do stuff with the database
+  dbDisconnect(mydb)
+  #+END_SRC

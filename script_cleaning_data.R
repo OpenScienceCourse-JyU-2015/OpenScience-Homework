@@ -108,7 +108,7 @@ sort(unique(trees$SPECIES))
   trees$genus <-  sapply(strsplit(trees$SPECIES," "),`[`,1)
 
 # end of data tidying ####
-  
+
 # write the new file in the disk ####
   write.csv(trees, "odTrees_afterGMM.csv",row.names = FALSE )
 

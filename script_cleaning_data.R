@@ -32,18 +32,28 @@ unique(trees$SPECIESTYPE)
 unique(trees$AGE)   
 # replace empty lines for NA and standardize nomenclature
 trees$AGE[which(trees$AGE=="")] <- NA
-trees$AGE[which(trees$AGE=="Semi-Mature")] <- "Semi Mature"
+## Eric's comment: You could gsub here and below to replace '-' and '/' with a 
+# space, which would make it more robust
+#trees$AGE[which(trees$AGE=="Semi-Mature")] <- "Semi Mature"
+trees$AGE <- gsub('-', ' ', trees$AGE)
+
   
-unique(trees$DESCRIPTION)    
+unique(trees$DESCRIPTION)
 # standardize nomenclature
-trees$DESCRIPTION[which(trees$DESCRIPTION=="Semi-Mature")] <- "Semi Mature"
-trees$DESCRIPTION[which(trees$DESCRIPTION=="Juvenile/Young")] <- "Juvenile Young"
+trees$DESCRIPTION <- gsub('-', ' ', trees$DESCRIPTION)
+trees$DESCRIPTION <- gsub('/', ' ', trees$DESCRIPTION)
+#trees$DESCRIPTION[which(trees$DESCRIPTION=="Semi-Mature")] <- "Semi Mature"
+#trees$DESCRIPTION[which(trees$DESCRIPTION=="Juvenile/Young")] <- "Juvenile Young"
 
 unique(trees$TREESURROUND)    
 # replace empty lines for NA and normalize nomenclature
-trees$TREESURROUND[which(trees$TREESURROUND=="Bramble/Briars")] <- "Bramble Briars"
+#trees$TREESURROUND[which(trees$TREESURROUND=="Bramble/Briars")] <- "Bramble Briars"
+trees$TREESURROUND <- gsub('/', ' ', trees$TREESURROUND)
 
-unique(trees$DIAMETERinCENTIMETRES)
+# Eric's comment: How about sorting the diameter values to get a better
+# feel of the data?
+#unique(trees$DIAMETERinCENTIMETRES)
+sort(unique(trees$DIAMETERinCENTIMETRES))
 ## Gabriel's version
 ## multiply negative values per -1, since cm cannot be negative
 #trees$DIAMETERinCENTIMETRES[which(trees$DIAMETERinCENTIMETRES<0)] <- -1*trees$DIAMETERinCENTIMETRES[which(trees$DIAMETERinCENTIMETRES<0)]
@@ -52,8 +62,13 @@ unique(trees$DIAMETERinCENTIMETRES)
 ## Can we really assume it is just a sign error? There are many of them.
 ## The most conservative approach could be just to set those values to NA
 trees$DIAMETERinCENTIMETRES[trees$DIAMETERinCENTIMETRES<=0)] = NA
+# Eric's comment: Yes, I agree with Matthieu. There is something fishy with the 
+# data. Why are negative values limited to -181, while positive values are 
+# much larger? Best to be conservative here
 
-unique(trees$SPREADRADIUSinMETRES)
+# Eric's comment: Use sort to get a clearer picture of the data
+#unique(trees$SPREADRADIUSinMETRES)
+sort(unique(trees$SPREADRADIUSinMETRES))
 ## Gabriel's version:
 ## multiply negative values per -1, since negatives are not allowed
 #trees$SPREADRADIUSinMETRES[which(trees$SPREADRADIUSinMETRES<0)] <- -1*trees$SPREADRADIUSinMETRES[which(trees$SPREADRADIUSinMETRES<0)]
@@ -65,7 +80,9 @@ unique(trees$TREETAG)
 # replace empty lines for NA 
 trees$TREETAG[which(trees$TREETAG=="")] <- NA
 
-unique(trees$TREEHEIGHTinMETRES)    
+# Eric's comment: Use sort
+#unique(trees$TREEHEIGHTinMETRES)
+sort(unique(trees$TREEHEIGHTinMETRES))
 ## Gabriel's version:
 ## multiply negative values per -1, since negatives are not allowed
 #trees$TREEHEIGHTinMETRES[which(trees$TREEHEIGHTinMETRES<0)] <- -1*trees$TREEHEIGHTinMETRES[which(trees$TREEHEIGHTinMETRES<0)]

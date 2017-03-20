@@ -124,3 +124,9 @@ dbDisconnect(db)
 # the information will be propagated to all rows as needed when we perform a
 # merge between the individuals and the species tables.
 
+# Eric's comment: Although the location data is not needlessly repeated, one 
+# option might be to make a location table, which can be joined to the tree 
+# data by 'TREETAG'. This way, if you wanted to add some more location data, or 
+# derive location- based data (e.g. distance to nearest neighbouring tree) you 
+# wouldn't need to also load the tree data.
+

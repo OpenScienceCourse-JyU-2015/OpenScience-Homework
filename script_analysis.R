@@ -18,6 +18,9 @@ street <- dbReadTable(mydb, "treesStreet")
 trees <- rbind(park, street) # this is the dataset for the full city
 
 #function 1 ####
+# Eric's comment: You have done a good job of including commments in your code, 
+# but it would have been nice to have a little bit more explanation as to what 
+# the function does.
 
 #function for parks
 parkfun <- function(x) {
@@ -108,7 +111,7 @@ parkfun2 <- function(x,y){
 }
 
 #teste
-parkfun("Acer",1000)
+parkfun2("Acer",1000)
 
 #function2 for the streets
 
@@ -185,7 +188,9 @@ averageDistGenusMinCount = function(data, minCount) {
     for (g in seq_along(genus)) {
         avgDist[g] = averageDistGenus(data = data, x = genus[g])
     }
-    return(data.frame(genus = genus, count = counts[counts >= minCount],
+    # Eric's comment: 'counts', which is a named vector needs to be converted to a 
+    # plain vector, otherwise the name and value columns are added to the dataframe.
+    return(data.frame(genus = genus, count = as.vector(counts[counts >= minCount]),
                       avgDist = avgDist))
 }
 
@@ -244,6 +249,7 @@ trees$CONDITION = factor(trees$CONDITION, levels = c("Dead", "Dying",
   "Very Poor", "Poor", "Fair", "Good"), ordered = T)
 
 ## Maybe this view is also interesting
+# Eric's comment: Yes, I think it is easier to read this version
 condition2 <- ggplot(trees, aes(x=TYPEOFTREE, y=TREEHEIGHTinMETRES, fill=CONDITION))+
   geom_boxplot()
 condition2
